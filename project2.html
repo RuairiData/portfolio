@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>project 2 | Ruairí McHugh</title>
+  <style>
+    body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:#0b0f14;color:#e9eef6}
+    .wrap{max-width:900px;margin:0 auto;padding:28px 18px 60px}
+    a{color:#e9eef6}
+    h1{margin:0 0 10px}
+    p,li{color:#a7b2c3;line-height:1.6}
+    img{width:100%;border:1px solid #263043;border-radius:14px;margin:12px 0}
+    .box{border:1px solid #263043;border-radius:18px;padding:16px;background:#121826;margin:14px 0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="index.html">← Back</a>
+    <h1>project 2 — Reporting / MI Dashboard</h1>
+
+    <div class="box">
+      <p><b>Problem:</b> Stakeholders needed a single KPI view and a reliable way to explain performance drivers.</p>
+      <p><b>Data:</b> Public/synthetic dataset at monthly grain (policies/transactions/claims).</p>
+      <p><b>Approach:</b></p>
+      <ul>
+        <li>Modelled a star schema and defined KPI measures consistently.</li>
+        <li>Built drilldowns for variance/drivers and segmented performance.</li>
+        <li>Added basic QA checks (missing keys, duplicates, outliers).</li>
+      </ul>
+      <p><b>Outcome:</b> Clear executive view + driver analysis; reduced manual reconciliation and improved confidence in the numbers.</p>
+    </div>
+
+    <img src="assets/project2_overview.png" alt="project 2 overview dashboard">
+    <img src="assets/project2_drilldown.png" alt="project 2 drilldown dashboard">
+  </div>
+</body>
+</html>
