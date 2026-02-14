@@ -13,26 +13,77 @@
     .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
     .top h2{margin:0;font-size:20px}
     .tag{color:#a7b2c3;font-size:14px}
+
     .grid{display:grid;grid-template-columns:1.2fr 1fr 60px;gap:14px;margin-top:14px;align-items:stretch}
     .card{padding:18px;border:1px solid #263043;border-radius:16px;background:#121826}
     .card h3{margin:0 0 8px;font-size:16px}
     .meta{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
     .pill{font-size:12px;color:#a7b2c3;border:1px solid #263043;border-radius:999px;padding:5px 10px;background:rgba(255,255,255,.02)}
+
     .visual{display:grid;grid-template-rows:1fr 1fr;gap:14px}
     .shot{border:1px solid #263043;border-radius:14px;overflow:hidden;background:#0e1420;min-height:98px}
     .shot img{width:100%;height:100%;object-fit:cover;display:block}
-    /* Use for phone/portrait screenshots so they don't get cropped */
-    .shot--contain img{object-fit:contain;background:#0e1420}
+
     .go{display:flex;align-items:center;justify-content:center;border:1px solid #263043;border-radius:16px;background:rgba(255,255,255,.02);font-size:26px;text-decoration:none;color:#e9eef6}
     .go:hover{transform:translateX(3px)}
-    @media(max-width:820px){.grid{grid-template-columns:1fr}.visual{grid-template-columns:1fr 1fr;grid-template-rows:none}.go{height:56px}}
-    @media(max-width:520px){.visual{grid-template-columns:1fr}}
+
+    /* ---- NEW: Horizontal scroll strip for phone screenshots ---- */
+    .grid--noarrow{grid-template-columns:1.2fr 1fr;} /* used for Project 3 */
+    .hscroll{
+      display:flex;
+      gap:12px;
+      overflow-x:auto;
+      padding:10px;
+      border:1px solid #263043;
+      border-radius:16px;
+      background:#0e1420;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+    }
+    .hscroll::-webkit-scrollbar{height:10px}
+    .hscroll::-webkit-scrollbar-thumb{background:#263043;border-radius:999px}
+    .phone{
+      flex:0 0 auto;
+      width:220px;           /* phone-ish */
+      height:440px;          /* phone-ish */
+      border:1px solid #263043;
+      border-radius:18px;
+      overflow:hidden;
+      background:#0b0f14;
+      scroll-snap-align:start;
+    }
+    .phone img{
+      width:100%;
+      height:100%;
+      object-fit:contain;    /* important for portrait screenshots */
+      display:block;
+      background:#0b0f14;
+    }
+    .card a{
+      color:#e9eef6;
+      text-decoration:none;
+      border-bottom:1px solid rgba(233,238,246,.25);
+    }
+    .card a:hover{border-bottom-color:#e9eef6}
+
+    @media(max-width:820px){
+      .grid{grid-template-columns:1fr}
+      .visual{grid-template-columns:1fr 1fr;grid-template-rows:none}
+      .go{height:56px}
+
+      .grid--noarrow{grid-template-columns:1fr}
+      .phone{width:210px;height:420px}
+    }
+    @media(max-width:520px){
+      .visual{grid-template-columns:1fr}
+      .phone{width:200px;height:400px}
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>Ruairí McHugh — Data & BI Portfolio</h1>
-    <p>Short case studies (screenshots + write-up). All visuals use public/synthetic or personal data — no proprietary client/employer info.</p>
+    <p>Short case studies (screenshots + write-up). All visuals use public/synthetic or personal data — no proprietary info.</p>
 
     <section class="section">
       <div class="top">
@@ -86,29 +137,43 @@
         <h2>Project 3 — Tik Box (Habit Analytics)</h2>
         <div class="tag">KPI design • time intelligence • targets vs actual • insights</div>
       </div>
-      <div class="grid">
+
+      <!-- No arrow for Project 3 -->
+      <div class="grid grid--noarrow">
         <div class="card">
           <h3>Why it’s relevant for Power BI roles</h3>
           <p>
             Tik Box is a KPI reporting + insights product: it tracks completion over time (YTD and cumulative),
             measures progress vs weekly targets, and highlights patterns (best/most skipped day, habit pairings).
-            It’s the same “overview → drilldown” journey you build in MI/BI dashboards.
+            It mirrors the “overview → drilldown” journey you build in MI/BI dashboards.
           </p>
+          <p style="margin-top:10px;">
+            <b>Outcome:</b> Clear progress-to-target reporting with consistent metric definitions and a drill-down path from
+            overview insights to habit-level detail.
+          </p>
+
           <div class="meta">
             <span class="pill">KPI definitions</span>
             <span class="pill">Targets vs actual</span>
             <span class="pill">Time intelligence</span>
-            <span class="pill">Drill-down UX</span>
+            <span class="pill">UX / drill-down</span>
           </div>
+
+          <p style="margin-top:12px;">
+            <a href="project3.html">View case study →</a>
+          </p>
         </div>
 
-        <div class="visual">
-          <!-- These are portrait screenshots; use contain to avoid cropping -->
-          <div class="shot shot--contain"><img src="assets/tikbox_insights_cumulative.png" alt="Tik Box cumulative progress (weekly)"></div>
-          <div class="shot shot--contain"><img src="assets/tikbox_yoga_detail.png" alt="Tik Box habit detail with weekly goals hit and day-of-week insight"></div>
+        <!-- Horizontal scroll of all phone screenshots -->
+        <div class="hscroll" aria-label="Tik Box screenshots (scroll horizontally)">
+          <div class="phone"><img src="assets/tikbox_icon.png" alt="Tik Box app icon"></div>
+          <div class="phone"><img src="assets/tikbox_habits_list.png" alt="Habits list and weekly goals"></div>
+          <div class="phone"><img src="assets/tikbox_edit_habit.png" alt="Edit habit modal (name, colour, weekly goal)"></div>
+          <div class="phone"><img src="assets/tikbox_year_grid.png" alt="Year grid view (calendar heatmap)"></div>
+          <div class="phone"><img src="assets/tikbox_insights_list.png" alt="Insights list with completion rates"></div>
+          <div class="phone"><img src="assets/tikbox_insights_cumulative.png" alt="Cumulative progress weekly chart"></div>
+          <div class="phone"><img src="assets/tikbox_yoga_detail.png" alt="Yoga habit detail with goals hit and day-of-week insight"></div>
         </div>
-
-        <a class="go" href="project3.html" aria-label="Open Project 3">→</a>
       </div>
     </section>
 
