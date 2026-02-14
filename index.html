@@ -61,6 +61,27 @@
     .hscroll::-webkit-scrollbar{height:10px}
     .hscroll::-webkit-scrollbar-thumb{background:#263043;border-radius:999px}
 
+    /* Two-row horizontal gallery (for Projects 4–5) */
+    .hscroll2{
+      display:grid;
+      grid-auto-flow:column;
+      grid-auto-columns:max-content;
+      grid-template-rows:1fr 1fr;   /* <-- two rows */
+      gap:12px;
+      overflow-x:auto;
+      padding:10px;
+      border:1px solid #263043;
+      border-radius:16px;
+      background:#0e1420;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      width:100%;
+      min-width:0;
+      align-content:start;
+    }
+    .hscroll2::-webkit-scrollbar{height:10px}
+    .hscroll2::-webkit-scrollbar-thumb{background:#263043;border-radius:999px}
+
     /* Phone frames */
     .phone{
       flex:0 0 auto;
@@ -82,7 +103,6 @@
 
     /* Wide dashboard frames */
     .wide{
-      flex:0 0 auto;
       width:620px;
       height:360px;
       border:1px solid #263043;
@@ -97,6 +117,12 @@
       object-fit:contain;
       display:block;
       background:#0b0f14;
+    }
+
+    /* Slightly smaller wide frames for 2-row layout (fits nicer) */
+    .wide--sm{
+      width:520px;
+      height:300px;
     }
 
     /* Click-to-enlarge affordance */
@@ -177,13 +203,18 @@
       .go{height:56px}
       .grid--noarrow{grid-template-columns:1fr}
       .phone{width:210px;height:420px}
+
       .wide{width:92vw;height:52vw;max-height:420px}
+      .wide--sm{width:92vw;height:52vw;max-height:420px} /* collapse to single row feel on mobile */
+
+      .hscroll2{grid-template-rows:1fr} /* single row on small screens */
       .lightbox__caption{white-space:normal}
     }
     @media(max-width:520px){
       .visual{grid-template-columns:1fr}
       .phone{width:200px;height:400px}
       .wide{width:92vw;height:56vw}
+      .wide--sm{width:92vw;height:56vw}
     }
   </style>
 </head>
@@ -317,9 +348,11 @@
           </p>
         </div>
 
-        <div class="hscroll" aria-label="Energy Forecast Dashboard screenshots (scroll horizontally)">
-          <div class="wide"><img src="assets/energy_dashboard_overview.png" alt="Energy Forecast Dashboard overview (controls, holdout overlays, model summary)"></div>
-          <div class="wide"><img src="assets/energy_dashboard_filtered.png" alt="Energy Forecast Dashboard filtered view (reduced clutter, focused model comparison)"></div>
+        <!-- two rows -->
+        <div class="hscroll2" aria-label="Energy Forecast Dashboard screenshots (scroll horizontally)">
+          <div class="wide wide--sm"><img src="assets/energy_dashboard_overview.png" alt="Energy Forecast Dashboard overview (controls, holdout overlays, model summary)"></div>
+          <div class="wide wide--sm"><img src="assets/energy_dashboard_filtered.png" alt="Energy Forecast Dashboard filtered view (reduced clutter, focused model comparison)"></div>
+          <!-- If you later add more screenshots, keep appending here -->
         </div>
       </div>
     </section>
@@ -367,11 +400,12 @@
           </p>
         </div>
 
-        <div class="hscroll" aria-label="New Dwelling Completions screenshots (scroll horizontally)">
-          <div class="wide"><img src="assets/dwellings_dashboard_total_overview.png" alt="Dwelling completions dashboard — total overview (KPIs, map, bar chart)"></div>
-          <div class="wide"><img src="assets/dwellings_dashboard_line_chart.png" alt="Dwelling completions dashboard — line chart view (quarter trend)"></div>
-          <div class="wide"><img src="assets/dwellings_dashboard_pie_chart.png" alt="Dwelling completions dashboard — pie chart distribution by county"></div>
-          <div class="wide"><img src="assets/dwellings_dashboard_bar_chart.png" alt="Dwelling completions dashboard — bar chart by county (selected quarter)"></div>
+        <!-- two rows -->
+        <div class="hscroll2" aria-label="New Dwelling Completions screenshots (scroll horizontally)">
+          <div class="wide wide--sm"><img src="assets/dwellings_dashboard_total_overview.png" alt="Dwelling completions dashboard — total overview (KPIs, map, bar chart)"></div>
+          <div class="wide wide--sm"><img src="assets/dwellings_dashboard_line_chart.png" alt="Dwelling completions dashboard — line chart view (quarter trend)"></div>
+          <div class="wide wide--sm"><img src="assets/dwellings_dashboard_pie_chart.png" alt="Dwelling completions dashboard — pie chart distribution by county"></div>
+          <div class="wide wide--sm"><img src="assets/dwellings_dashboard_bar_chart.png" alt="Dwelling completions dashboard — bar chart by county (selected quarter)"></div>
         </div>
       </div>
     </section>
