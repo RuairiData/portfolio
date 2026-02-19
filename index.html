@@ -125,9 +125,35 @@
       height:300px;
     }
 
+    /* NEW: 2-up grid for “just a couple” screenshots (Project 6) */
+    .twoup{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      padding:10px;
+      border:1px solid #263043;
+      border-radius:16px;
+      background:#0e1420;
+      min-width:0;
+    }
+    .panel{
+      border:1px solid #263043;
+      border-radius:16px;
+      overflow:hidden;
+      background:#0b0f14;
+      height:360px;
+    }
+    .panel img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      background:#0b0f14;
+    }
+
     /* Click-to-enlarge affordance */
-    .shot img, .phone img, .wide img{cursor:zoom-in}
-    .shot img:hover, .phone img:hover, .wide img:hover{opacity:.92}
+    .shot img, .phone img, .wide img, .panel img{cursor:zoom-in}
+    .shot img:hover, .phone img:hover, .wide img:hover, .panel img:hover{opacity:.92}
 
     /* Lightbox modal */
     .lightbox{
@@ -206,8 +232,10 @@
 
       .wide{width:92vw;height:52vw;max-height:420px}
       .wide--sm{width:92vw;height:52vw;max-height:420px}
-
       .hscroll2{grid-template-rows:1fr} /* single row on small screens */
+
+      .twoup{grid-template-columns:1fr}
+      .panel{height:auto; aspect-ratio:16/9;}
       .lightbox__caption{white-space:normal}
     }
     @media(max-width:520px){
@@ -428,7 +456,7 @@
 
           <p style="margin-top:10px;">
             <b>Important:</b> before publishing, I anonymise all personally identifying fields (owners/consultants/firms)
-            by mapping them to synthetic labels (e.g., Owner A12, Firm K07). No real client or internal identifiers are shared.
+            by mapping them to synthetic labels (e.g., <i>Owner A12</i>, <i>Firm K07</i>). No real client or internal identifiers are shared.
           </p>
 
           <div class="meta">
@@ -450,9 +478,13 @@
           </p>
         </div>
 
-        <div class="hscroll" aria-label="Operations dashboard screenshots (scroll horizontally)">
-          <div class="wide wide--sm"><img src="assets/crm_ops_dashboard.png" alt="Operations workflow dashboard — KPIs, activity volumes, and team/person slicing"></div>
-          <div class="wide wide--sm"><img src="assets/crm_ops_data_model.png" alt="Operations dataset model — relationships, dimensions, and measures table"></div>
+        <div class="twoup" aria-label="Operations dashboard screenshots">
+          <div class="panel">
+            <img src="assets/crm_ops_dashboard.png" alt="Operations workflow dashboard — KPIs, activity volumes, and team/person slicing">
+          </div>
+          <div class="panel">
+            <img src="assets/crm_ops_data_model.png" alt="Operations dataset model — relationships, dimensions, and measures table">
+          </div>
         </div>
       </div>
     </section>
@@ -497,7 +529,7 @@
       }
 
       // Make all portfolio images clickable + keyboard accessible
-      const imgs = document.querySelectorAll('.shot img, .phone img, .wide img');
+      const imgs = document.querySelectorAll('.shot img, .phone img, .wide img, .panel img');
       imgs.forEach(img => {
         img.tabIndex = 0;
         img.setAttribute('role','button');
