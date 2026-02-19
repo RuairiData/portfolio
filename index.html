@@ -1,55 +1,167 @@
-<!-- Project 7 -->
-<section class="section">
-  <div class="top">
-    <h2>Project 7 — Client Pipeline & Task Monitoring (Power BI)</h2>
-    <div class="tag">Power BI • DAX • semantic model • operational KPIs</div>
-  </div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ruairí McHugh | Portfolio</title>
+  <style>
+    body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:#0b0f14;color:#e9eef6}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 60px}
+    h1{margin:0 0 6px;font-size:28px}
+    p{margin:0;color:#a7b2c3;line-height:1.5}
+    .section{margin-top:18px;padding:22px;border:1px solid #263043;border-radius:24px;background:rgba(255,255,255,.02)}
+    .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+    .top h2{margin:0;font-size:20px}
+    .tag{color:#a7b2c3;font-size:14px}
 
-  <div class="grid grid--noarrow">
-    <div class="card">
-      <h3>Why it’s relevant for Power BI roles</h3>
-      <p>
-        This is an operational pipeline dashboard: it tracks clients in-flight, assets in pipeline vs expected assets,
-        task status (active/pending), and ageing (e.g., tasks by age band) with slicers for owner/consultant and agent firm.
-        It demonstrates end-to-end BI thinking: clear KPI definitions, drillable breakdowns, and a model that supports fast,
-        reliable filtering.
-      </p>
+    /* Grid layout */
+    .grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 60px;
+      gap:14px;
+      margin-top:14px;
+      align-items:stretch;
+    }
 
-      <p style="margin-top:10px;">
-        <b>Data privacy note:</b> before sharing, I anonymise personally identifying fields (owners/consultants/firms)
-        by mapping them to synthetic labels (e.g., Owner A12, Firm K07) so no real identifiers appear in visuals.
-      </p>
+    /* 1/3 text + 2/3 visuals (no arrow) */
+    .grid--noarrow{
+      grid-template-columns:minmax(0,1fr) minmax(0,2fr);
+    }
+    .grid > *{min-width:0}
 
-      <div class="meta">
-        <span class="pill">KPI cards</span>
-        <span class="pill">Operational monitoring</span>
-        <span class="pill">Slicers</span>
-        <span class="pill">DAX measures</span>
-        <span class="pill">Model design</span>
-      </div>
+    .card{padding:18px;border:1px solid #263043;border-radius:16px;background:#121826}
+    .card h3{margin:0 0 8px;font-size:16px}
+    .meta{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+    .pill{font-size:12px;color:#a7b2c3;border:1px solid #263043;border-radius:999px;padding:5px 10px;background:rgba(255,255,255,.02)}
+    .card a{color:#e9eef6;text-decoration:none;border-bottom:1px solid rgba(233,238,246,.25)}
+    .card a:hover{border-bottom-color:#e9eef6}
 
-      
-      <p style="margin-top:12px;">
-        <a href="project7.html">View case study →</a>
-      </p>
+    /* Static 2-shot visual stack (Projects 1–2) */
+    .visual{display:grid;grid-template-rows:1fr 1fr;gap:14px}
+    .shot{border:1px solid #263043;border-radius:14px;overflow:hidden;background:#0e1420;min-height:98px}
+    .shot img{width:100%;height:100%;object-fit:cover;display:block}
 
-      <p style="margin-top:12px;color:#a7b2c3;font-size:13px;">
-        <b>Image filenames (place in <code>assets/</code>):</b><br>
-        • pipeline_dashboard_overview.png<br>
-        • pipeline_dashboard_data_model.png
-      </p>
-    </div>
+    .go{display:flex;align-items:center;justify-content:center;border:1px solid #263043;border-radius:16px;background:rgba(255,255,255,.02);font-size:26px;text-decoration:none;color:#e9eef6}
+    .go:hover{transform:translateX(3px)}
 
-    <!-- two rows -->
-    <div class="hscroll2" aria-label="Client Pipeline dashboard screenshots (scroll horizontally)">
-      <div class="wide wide--sm">
-        <img src="assets/pipeline_dashboard_overview.png"
-             alt="Client pipeline dashboard — KPI cards, task status breakdowns, ageing, and slicers">
-      </div>
-      <div class="wide wide--sm">
-        <img src="assets/pipeline_dashboard_data_model.png"
-             alt="Pipeline semantic model — relationships, dimensions, and measures structure">
-      </div>
-    </div>
-  </div>
-</section>
+    /* Horizontal scroll strip (phones + wide screenshots) */
+    .hscroll{
+      display:flex;
+      gap:12px;
+      overflow-x:auto;
+      padding:10px;
+      border:1px solid #263043;
+      border-radius:16px;
+      background:#0e1420;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      width:100%;
+      min-width:0;
+    }
+    .hscroll::-webkit-scrollbar{height:10px}
+    .hscroll::-webkit-scrollbar-thumb{background:#263043;border-radius:999px}
+
+    /* Two-row horizontal gallery (Projects 4–5) */
+    .hscroll2{
+      display:grid;
+      grid-auto-flow:column;
+      grid-auto-columns:max-content;
+      grid-template-rows:1fr 1fr;
+      gap:12px;
+      overflow-x:auto;
+      padding:10px;
+      border:1px solid #263043;
+      border-radius:16px;
+      background:#0e1420;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      width:100%;
+      min-width:0;
+      align-content:start;
+    }
+    .hscroll2::-webkit-scrollbar{height:10px}
+    .hscroll2::-webkit-scrollbar-thumb{background:#263043;border-radius:999px}
+
+    /* Phone frames */
+    .phone{
+      flex:0 0 auto;
+      width:220px;
+      height:440px;
+      border:1px solid #263043;
+      border-radius:18px;
+      overflow:hidden;
+      background:#0b0f14;
+      scroll-snap-align:start;
+    }
+    .phone img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      background:#0b0f14;
+    }
+
+    /* Wide dashboard frames (for scroll strips) */
+    .wide{
+      width:620px;
+      height:360px;
+      border:1px solid #263043;
+      border-radius:16px;
+      overflow:hidden;
+      background:#0b0f14;
+      scroll-snap-align:start;
+    }
+    .wide img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      background:#0b0f14;
+    }
+    .wide--sm{width:520px;height:300px}
+
+    /* Two-image grid for Projects 6–7 (no scroll) */
+    .gallery2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      width:100%;
+      min-width:0;
+      padding:10px;
+      border:1px solid #263043;
+      border-radius:16px;
+      background:#0e1420;
+    }
+    .frame{
+      border:1px solid #263043;
+      border-radius:16px;
+      overflow:hidden;
+      background:#0b0f14;
+      aspect-ratio:16/9;
+    }
+    .frame img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      background:#0b0f14;
+    }
+
+    /* Click-to-enlarge affordance */
+    .shot img, .phone img, .wide img, .frame img{cursor:zoom-in}
+    .shot img:hover, .phone img:hover, .wide img:hover, .frame img:hover{opacity:.92}
+
+    /* Lightbox modal */
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.78);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      padding:18px;
+    }
+    .lightbox.is-open{display:flex}
+    .lightbox__panel{
+      max-width:min(1200px, 96vw
