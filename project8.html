@@ -1,1 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project 8 — Approvals Workflow Matrix (Power BI)</title>
+  <style>
+    body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:#0b0f14;color:#e9eef6}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 60px}
+    a{color:#e9eef6;text-decoration:none}
+    .back{display:inline-block;margin-bottom:14px;color:#a7b2c3}
+    .back:hover{color:#e9eef6}
+    h1{margin:0 0 6px;font-size:26px}
+    p{margin:0;color:#a7b2c3;line-height:1.55}
+    .section{margin-top:14px;padding:22px;border:1px solid #263043;border-radius:24px;background:rgba(255,255,255,.02)}
+    .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+    .tag{color:#a7b2c3;font-size:14px}
+    .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:14px;margin-top:14px}
+    .card{padding:18px;border:1px solid #263043;border-radius:16px;background:#121826}
+    .card h2{margin:0 0 8px;font-size:16px}
+    .meta{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+    .pill{font-size:12px;color:#a7b2c3;border:1px solid #263043;border-radius:999px;padding:5px 10px;background:rgba(255,255,255,.02)}
+    .note{margin-top:10px;color:#a7b2c3;font-size:13px;line-height:1.5}
+
+    .shot{border:1px solid #263043;border-radius:14px;overflow:hidden;background:#0e1420;min-height:420px}
+    .shot img{width:100%;height:100%;object-fit:contain;display:block;background:#0b0f14;cursor:zoom-in}
+    .shot img:hover{opacity:.92}
+
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;z-index:9999;padding:18px}
+    .lightbox.is-open{display:flex}
+    .lightbox__panel{max-width:min(1200px,96vw);width:100%;max-height:92vh;border:1px solid #263043;border-radius:18px;background:#0b0f14;overflow:hidden;display:flex;flex-direction:column}
+    .lightbox__top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-bottom:1px solid #263043;background:rgba(255,255,255,.02)}
+    .lightbox__caption{color:#a7b2c3;font-size:13px;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .lightbox__close{appearance:none;border:1px solid #263043;background:rgba(255,255,255,.02);color:#e9eef6;border-radius:12px;padding:6px 10px;cursor:pointer;font-size:14px}
+    .lightbox__imgwrap{display:flex;align-items:center;justify-content:center;padding:14px;flex:1 1 auto;min-height:0}
+    .lightbox__img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;background:#0b0f14}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}.shot{min-height:360px}.lightbox__caption{white-space:normal}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="index.html">← Back to portfolio</a>
+
+    <div class="section">
+      <div class="top">
+        <h1>Project 8 — Approvals Workflow Matrix (Power BI)</h1>
+        <div class="tag">Power BI • matrix design • workflow visibility • governance</div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2>Why it’s relevant for BI / ops reporting</h2>
+          <p>
+            This matrix design makes workflow ownership and status instantly legible:
+            task category/subcategory and approval type on the left, approvers across the top,
+            with a simple Active/Inactive encoding that supports operational governance.
+          </p>
+
+          <p class="note">
+            <b>What I’d call out in interviews:</b> designing matrices for scanning (not just reporting),
+            making exceptions obvious, and choosing encodings that reduce cognitive load.
+          </p>
+
+          <div class="meta">
+            <span class="pill">Matrix UX</span>
+            <span class="pill">Workflow visibility</span>
+            <span class="pill">Governance</span>
+            <span class="pill">Operational control</span>
+          </div>
+
+          <p style="margin-top:12px;color:#a7b2c3;font-size:13px;">
+            Image filename (place in <code>assets/</code>):<br>
+            • approvals_workflow_matrix.png
+          </p>
+        </div>
+
+        <div class="shot">
+          <img src="assets/approvals_workflow_matrix.png" alt="Approvals workflow matrix (Power BI)">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="Image preview">
+      <div class="lightbox__top">
+        <div id="lightboxCaption" class="lightbox__caption"></div>
+        <button id="lightboxClose" class="lightbox__close" type="button">Close ✕</button>
+      </div>
+      <div class="lightbox__imgwrap">
+        <img id="lightboxImg" class="lightbox__img" alt="">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const lb=document.getElementById('lightbox');
+      const lbImg=document.getElementById('lightboxImg');
+      const lbCap=document.getElementById('lightboxCaption');
+      const lbClose=document.getElementById('lightboxClose');
+
+      function openLB(src, alt){
+        lbImg.src=src; lbImg.alt=alt||''; lbCap.textContent=alt||'';
+        lb.classList.add('is-open'); lb.setAttribute('aria-hidden','false');
+        document.body.style.overflow='hidden'; lbClose.focus();
+      }
+      function closeLB(){
+        lb.classList.remove('is-open'); lb.setAttribute('aria-hidden','true');
+        lbImg.src=''; document.body.style.overflow='';
+      }
+      document.querySelectorAll('.shot img').forEach(img=>{
+        img.tabIndex=0; img.setAttribute('role','button');
+        img.addEventListener('click',()=>openLB(img.src,img.alt));
+        img.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLB(img.src,img.alt);}});
+      });
+      lbClose.addEventListener('click',closeLB);
+      lb.addEventListener('click',(e)=>{if(e.target===lb)closeLB();});
+      document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&lb.classList.contains('is-open'))closeLB();});
+    })();
+  </script>
+</body>
+</html>
 
