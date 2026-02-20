@@ -14,19 +14,7 @@
     .top h2{margin:0;font-size:20px}
     .tag{color:#a7b2c3;font-size:14px}
 
-    /* Grid layout */
-    .grid{
-      display:grid;
-      grid-template-columns:1.2fr 1fr 60px;
-      gap:14px;
-      margin-top:14px;
-      align-items:stretch;
-    }
-
-    /* 1/3 text + 2/3 visuals (no arrow) */
-    .grid--noarrow{
-      grid-template-columns:minmax(0,1fr) minmax(0,2fr);
-    }
+    .grid{display:grid;grid-template-columns:1.2fr 1fr 60px;gap:14px;margin-top:14px;align-items:stretch}
     .grid > *{min-width:0}
 
     .card{padding:18px;border:1px solid #263043;border-radius:16px;background:#121826}
@@ -36,183 +24,75 @@
     .card a{color:#e9eef6;text-decoration:none;border-bottom:1px solid rgba(233,238,246,.25)}
     .card a:hover{border-bottom-color:#e9eef6}
 
-    /* Projects 1–2: 2-shot visual stack */
+    /* Two-shot visual stack (like your early projects) */
     .visual{display:grid;grid-template-rows:1fr 1fr;gap:14px}
-    .shot{border:1px solid #263043;border-radius:14px;overflow:hidden;background:#0e1420;min-height:98px}
+    .shot{border:1px solid #263043;border-radius:14px;overflow:hidden;background:#0e1420;min-height:110px}
     .shot img{width:100%;height:100%;object-fit:cover;display:block}
 
-    .go{display:flex;align-items:center;justify-content:center;border:1px solid #263043;border-radius:16px;background:rgba(255,255,255,.02);font-size:26px;text-decoration:none;color:#e9eef6}
+    /* Use for phone-ish previews so they don't get cropped */
+    .shot--contain img{object-fit:contain;background:#0b0f14}
+
+    .placeholder{
+      display:flex;align-items:center;justify-content:center;
+      color:#a7b2c3;font-size:13px;line-height:1.4;
+      padding:12px;text-align:center;
+    }
+
+    .go{
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid #263043;border-radius:16px;
+      background:rgba(255,255,255,.02);
+      font-size:26px;text-decoration:none;color:#e9eef6
+    }
     .go:hover{transform:translateX(3px)}
 
-    /* Project 3: horizontal scroll strip (phones) */
-    .hscroll{
-      display:flex;
-      gap:12px;
-      overflow-x:auto;
-      padding:10px;
-      border:1px solid #263043;
-      border-radius:16px;
-      background:#0e1420;
-      scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch;
-      width:100%;
-      min-width:0;
-    }
-    .hscroll::-webkit-scrollbar{height:10px}
-    .hscroll::-webkit-scrollbar-thumb{background:#263043;border-radius:999px}
+    /* Lightbox (click-to-enlarge) */
+    .shot img{cursor:zoom-in}
+    .shot img:hover{opacity:.92}
 
-    /* Phone frames */
-    .phone{
-      flex:0 0 auto;
-      width:220px;
-      height:440px;
-      border:1px solid #263043;
-      border-radius:18px;
-      overflow:hidden;
-      background:#0b0f14;
-      scroll-snap-align:start;
-    }
-    .phone img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      display:block;
-      background:#0b0f14;
-    }
-
-    /* Projects 4–7: TWO ROWS (stacked images, like Projects 1–2) */
-    .stack2{
-      display:grid;
-      grid-template-rows:1fr 1fr;
-      gap:14px;
-      border:1px solid #263043;
-      border-radius:16px;
-      background:#0e1420;
-      padding:10px;
-    }
-
-    /* Shared wide frame (fluid width, fixed ratio) */
-    .frame{
-      border:1px solid #263043;
-      border-radius:14px;
-      overflow:hidden;
-      background:#0b0f14;
-      scroll-snap-align:start;
-    }
-    .frame--wide{aspect-ratio:16/9; min-height:220px;}
-    .frame img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      display:block;
-      background:#0b0f14;
-    }
-
-    /* Project 5: 2x2 grid (still "two rows", but shows all four at once) */
-    .grid2x2{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-      border:1px solid #263043;
-      border-radius:16px;
-      background:#0e1420;
-      padding:10px;
-      align-content:start;
-    }
-
-    /* Click-to-enlarge affordance */
-    .shot img, .phone img, .frame img{cursor:zoom-in}
-    .shot img:hover, .phone img:hover, .frame img:hover{opacity:.92}
-
-    /* Lightbox modal */
     .lightbox{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.78);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:9999;
-      padding:18px;
+      position:fixed;inset:0;background:rgba(0,0,0,.78);
+      display:none;align-items:center;justify-content:center;
+      z-index:9999;padding:18px;
     }
     .lightbox.is-open{display:flex}
     .lightbox__panel{
-      max-width:min(1200px, 96vw);
-      width:100%;
-      max-height:92vh;
-      border:1px solid #263043;
-      border-radius:18px;
-      background:#0b0f14;
+      max-width:min(1200px,96vw);width:100%;max-height:92vh;
+      border:1px solid #263043;border-radius:18px;background:#0b0f14;
       box-shadow:0 10px 40px rgba(0,0,0,.45);
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
+      overflow:hidden;display:flex;flex-direction:column;
     }
     .lightbox__top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:10px 12px;
-      border-bottom:1px solid #263043;
-      background:rgba(255,255,255,.02);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:10px 12px;border-bottom:1px solid #263043;background:rgba(255,255,255,.02);
     }
     .lightbox__caption{
-      color:#a7b2c3;
-      font-size:13px;
-      line-height:1.35;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
+      color:#a7b2c3;font-size:13px;line-height:1.35;
+      overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
     }
     .lightbox__close{
-      appearance:none;
-      border:1px solid #263043;
-      background:rgba(255,255,255,.02);
-      color:#e9eef6;
-      border-radius:12px;
-      padding:6px 10px;
-      cursor:pointer;
-      font-size:14px;
+      appearance:none;border:1px solid #263043;background:rgba(255,255,255,.02);
+      color:#e9eef6;border-radius:12px;padding:6px 10px;cursor:pointer;font-size:14px;
     }
     .lightbox__close:hover{background:rgba(255,255,255,.06)}
-    .lightbox__imgwrap{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:14px;
-      flex:1 1 auto;
-      min-height:0;
-    }
-    .lightbox__img{
-      max-width:100%;
-      max-height:100%;
-      object-fit:contain;
-      border-radius:12px;
-      background:#0b0f14;
-    }
+    .lightbox__imgwrap{display:flex;align-items:center;justify-content:center;padding:14px;flex:1 1 auto;min-height:0}
+    .lightbox__img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;background:#0b0f14}
 
     @media(max-width:820px){
       .grid{grid-template-columns:1fr}
       .visual{grid-template-columns:1fr 1fr;grid-template-rows:none}
       .go{height:56px}
-      .grid--noarrow{grid-template-columns:1fr}
-      .phone{width:210px;height:420px}
-
-      .grid2x2{grid-template-columns:1fr} /* stack on mobile */
-      .stack2{grid-template-rows:auto; gap:12px}
       .lightbox__caption{white-space:normal}
     }
     @media(max-width:520px){
       .visual{grid-template-columns:1fr}
-      .phone{width:200px;height:400px}
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>Ruairí McHugh — Data & BI Portfolio</h1>
-    <p>Short case studies (screenshots + write-up). All visuals use public/synthetic or personal data — no proprietary info.</p>
+    <p>Short case studies (screenshots + write-up). All visuals use public/synthetic or anonymised data — no proprietary info.</p>
 
     <!-- Project 1 -->
     <section class="section">
@@ -228,12 +108,10 @@
             <span class="pill">Star schema</span><span class="pill">DAX</span><span class="pill">QA checks</span>
           </div>
         </div>
-
         <div class="visual">
           <div class="shot"><img src="assets/project1_overview.png" alt="Project 1 overview"></div>
           <div class="shot"><img src="assets/project1_drilldown.png" alt="Project 1 drilldown"></div>
         </div>
-
         <a class="go" href="project1.html" aria-label="Open Project 1">→</a>
       </div>
     </section>
@@ -252,12 +130,10 @@
             <span class="pill">Automation</span><span class="pill">Governance</span><span class="pill">Exceptions</span>
           </div>
         </div>
-
         <div class="visual">
           <div class="shot"><img src="assets/project2_kpis.png" alt="Project 2 KPI tiles"></div>
           <div class="shot"><img src="assets/project2_trends.png" alt="Project 2 trends"></div>
         </div>
-
         <a class="go" href="project2.html" aria-label="Open Project 2">→</a>
       </div>
     </section>
@@ -268,36 +144,19 @@
         <h2>Project 3 — Tik Box (Habit Analytics)</h2>
         <div class="tag">KPI design • time intelligence • targets vs actual • insights</div>
       </div>
-
-      <div class="grid grid--noarrow">
+      <div class="grid">
         <div class="card">
-          <h3>Why it’s relevant for Power BI roles</h3>
-          <p>
-            Tik Box is a KPI reporting + insights product: it tracks completion over time (YTD and cumulative),
-            measures progress vs weekly targets, and highlights patterns (best/most skipped day, habit pairings).
-            It mirrors the “overview → drilldown” journey you build in MI/BI dashboards.
-          </p>
-
+          <h3>Why it matters</h3>
+          <p>Targets vs actual, time-based progress, and drill-down insights — the same storytelling pattern as BI dashboards.</p>
           <div class="meta">
-            <span class="pill">KPI definitions</span>
-            <span class="pill">Targets vs actual</span>
-            <span class="pill">Time intelligence</span>
-            <span class="pill">UX / drill-down</span>
+            <span class="pill">Targets</span><span class="pill">Time intelligence</span><span class="pill">UX drilldown</span>
           </div>
-
-          <p style="margin-top:12px;">
-            <a href="project3.html">View case study →</a>
-          </p>
         </div>
-
-        <div class="hscroll" aria-label="Tik Box screenshots (scroll horizontally)">
-          <div class="phone"><img src="assets/tikbox_insights_cumulative.png" alt="Cumulative progress weekly chart"></div>
-          <div class="phone"><img src="assets/tikbox_yoga_detail.png" alt="Yoga habit detail with goals hit and day-of-week insight"></div>
-          <div class="phone"><img src="assets/tikbox_habits_list.png" alt="Habits list and weekly goals"></div>
-          <div class="phone"><img src="assets/tikbox_edit_habit.png" alt="Edit habit modal (name, colour, weekly goal)"></div>
-          <div class="phone"><img src="assets/tikbox_year_grid.png" alt="Year grid view (calendar heatmap)"></div>
-          <div class="phone"><img src="assets/tikbox_insights_list.png" alt="Insights list with completion rates"></div>
+        <div class="visual">
+          <div class="shot shot--contain"><img src="assets/tikbox_insights_cumulative.png" alt="Tik Box — cumulative progress"></div>
+          <div class="shot shot--contain"><img src="assets/tikbox_year_grid.png" alt="Tik Box — year grid (calendar heatmap)"></div>
         </div>
+        <a class="go" href="project3.html" aria-label="Open Project 3">→</a>
       </div>
     </section>
 
@@ -307,43 +166,19 @@
         <h2>Project 4 — Energy Forecast ML Dashboard</h2>
         <div class="tag">Python • Plotly Dash • time-series ML • model comparison</div>
       </div>
-
-      <div class="grid grid--noarrow">
+      <div class="grid">
         <div class="card">
-          <h3>Why it’s relevant for analytics / BI roles</h3>
-          <p>
-            This dashboard turns a forecasting notebook into a decision tool: it lets stakeholders compare
-            classical baselines (SARIMA/SARIMAX) against neural sequence models (LSTM) under consistent,
-            time-based evaluation. Users can toggle traces to reduce clutter, inspect holdout behaviour, and
-            use RMSE/MAE summaries to rank models without losing the visual “why”.
-          </p>
-
-          <p style="margin-top:10px;">
-            <b>What I’d highlight in interviews:</b> time-aware train/test/holdout splits, horizon-based evaluation
-            (24h / 72h / 168h), transparent metrics, and interaction that changes <i>what</i> is shown rather than
-            changing the visual grammar.
-          </p>
-
+          <h3>Why it matters</h3>
+          <p>Turns forecasting into a decision tool: model comparison, holdout inspection, and interpretable metrics.</p>
           <div class="meta">
-            <span class="pill">Dash</span>
-            <span class="pill">SARIMA / SARIMAX</span>
-            <span class="pill">LSTM</span>
-            <span class="pill">MAE / RMSE</span>
-            <span class="pill">Holdout inspection</span>
+            <span class="pill">Dash</span><span class="pill">MAE/RMSE</span><span class="pill">Holdout</span>
           </div>
-
-          <p style="margin-top:12px;">
-            <a href="project4.html">View case study →</a>
-            &nbsp;&nbsp;•&nbsp;&nbsp;
-            <a href="assets/energy_forecast_report.pdf">Read report (PDF) →</a>
-          </p>
         </div>
-
-        <!-- two rows (stacked) -->
-        <div class="stack2" aria-label="Energy Forecast Dashboard screenshots">
-          <div class="frame frame--wide"><img src="assets/energy_dashboard_overview.png" alt="Energy Forecast Dashboard overview (controls, holdout overlays, model summary)"></div>
-          <div class="frame frame--wide"><img src="assets/energy_dashboard_filtered.png" alt="Energy Forecast Dashboard filtered view (reduced clutter, focused model comparison)"></div>
+        <div class="visual">
+          <div class="shot"><img src="assets/energy_dashboard_overview.png" alt="Energy dashboard — overview"></div>
+          <div class="shot"><img src="assets/energy_dashboard_filtered.png" alt="Energy dashboard — filtered comparison"></div>
         </div>
+        <a class="go" href="project4.html" aria-label="Open Project 4">→</a>
       </div>
     </section>
 
@@ -353,50 +188,19 @@
         <h2>Project 5 — New Dwelling Completions Dashboard (Ireland)</h2>
         <div class="tag">Python • Plotly Dash • geo-viz • interactive filtering</div>
       </div>
-
-      <div class="grid grid--noarrow">
+      <div class="grid">
         <div class="card">
-          <h3>Why it’s relevant for BI / reporting roles</h3>
-          <p>
-            This dashboard is a compact “BI-style” product: a single filter (Quarter) drives consistent KPI cards,
-            a county map view, and selectable chart views (bar / pie / line). It demonstrates the same skills employers
-            look for in Power BI roles—clear KPIs, cross-filtering logic, and multiple stakeholder-friendly views of the
-            same measure.
-          </p>
-
-          <p style="margin-top:10px;">
-            <b>Skills demonstrated:</b> metric definitions, interactive controls, ranking (top/lowest county),
-            geo visualisation, and chart switching for different analytical questions.
-          </p>
-
+          <h3>Why it matters</h3>
+          <p>Single quarter filter drives KPIs, county map, and multiple chart views (bar/pie/line) — BI-style consistency.</p>
           <div class="meta">
-            <span class="pill">Dash</span>
-            <span class="pill">KPI cards</span>
-            <span class="pill">Map (county)</span>
-            <span class="pill">Chart switching</span>
-            <span class="pill">Quarter filter</span>
+            <span class="pill">KPI cards</span><span class="pill">Map</span><span class="pill">Chart switch</span>
           </div>
-
-          <p style="margin-top:12px;">
-            <a href="project5.html">View case study →</a>
-          </p>
-
-          <p style="margin-top:12px;color:#a7b2c3;font-size:13px;">
-            <b>Image filenames (place in <code>assets/</code>):</b><br>
-            • dwellings_dashboard_total_overview.png<br>
-            • dwellings_dashboard_line_chart.png<br>
-            • dwellings_dashboard_pie_chart.png<br>
-            • dwellings_dashboard_bar_chart.png
-          </p>
         </div>
-
-        <!-- two rows (2x2) -->
-        <div class="grid2x2" aria-label="New Dwelling Completions screenshots">
-          <div class="frame frame--wide"><img src="assets/dwellings_dashboard_total_overview.png" alt="Dwelling completions dashboard — total overview (KPIs, map, bar chart)"></div>
-          <div class="frame frame--wide"><img src="assets/dwellings_dashboard_line_chart.png" alt="Dwelling completions dashboard — line chart view (quarter trend)"></div>
-          <div class="frame frame--wide"><img src="assets/dwellings_dashboard_pie_chart.png" alt="Dwelling completions dashboard — pie chart distribution by county"></div>
-          <div class="frame frame--wide"><img src="assets/dwellings_dashboard_bar_chart.png" alt="Dwelling completions dashboard — bar chart by county (selected quarter)"></div>
+        <div class="visual">
+          <div class="shot"><img src="assets/dwellings_dashboard_total_overview.png" alt="Dwelling completions — total overview"></div>
+          <div class="shot"><img src="assets/dwellings_dashboard_line_chart.png" alt="Dwelling completions — line chart"></div>
         </div>
+        <a class="go" href="project5.html" aria-label="Open Project 5">→</a>
       </div>
     </section>
 
@@ -406,46 +210,19 @@
         <h2>Project 6 — Operations Workflow Dashboard (Power BI)</h2>
         <div class="tag">Power BI • DAX • semantic model • operational monitoring</div>
       </div>
-
-      <div class="grid grid--noarrow">
+      <div class="grid">
         <div class="card">
-          <h3>Why it’s relevant for Power BI roles</h3>
-          <p>
-            This is an operational “command centre” dashboard: it tracks volume and status across workflow activity
-            (emails, tasks, mini-tasks, approvals, and phone calls) with slicers for team/person and consistent KPI definitions.
-            The model view highlights how I structure a clean semantic layer—dimension tables, a measures table, and controlled
-            relationships—to keep reporting reliable and performant.
-          </p>
-
-          <p style="margin-top:10px;">
-            <b>Data privacy note:</b> before publishing, I anonymise personally identifying fields (owners/consultants/firms)
-            by mapping them to synthetic labels (e.g., Owner A12, Firm K07) so no real identifiers appear in visuals.
-          </p>
-
+          <h3>Why it matters</h3>
+          <p>Operational “command centre” tracking volume + status across workflow activity, backed by a clean semantic layer.</p>
           <div class="meta">
-            <span class="pill">KPI cards</span>
-            <span class="pill">Slicers</span>
-            <span class="pill">DAX measures</span>
-            <span class="pill">Model design</span>
-            <span class="pill">Operational reporting</span>
+            <span class="pill">KPI cards</span><span class="pill">Slicers</span><span class="pill">Measures table</span>
           </div>
-
-          <p style="margin-top:12px;">
-            <a href="project6.html">View case study →</a>
-          </p>
-
-          <p style="margin-top:12px;color:#a7b2c3;font-size:13px;">
-            <b>Image filenames (place in <code>assets/</code>):</b><br>
-            • crm_ops_dashboard.png<br>
-            • crm_ops_data_model.png
-          </p>
         </div>
-
-        <!-- two rows (stacked) -->
-        <div class="stack2" aria-label="Operations Workflow screenshots">
-          <div class="frame frame--wide"><img src="assets/crm_ops_dashboard.png" alt="Operations workflow dashboard — KPIs, activity volumes, and team/person slicing"></div>
-          <div class="frame frame--wide"><img src="assets/crm_ops_data_model.png" alt="Operations dataset model — relationships, dimensions, and measures table"></div>
+        <div class="visual">
+          <div class="shot"><img src="assets/crm_ops_dashboard.png" alt="Operations workflow dashboard (Power BI)"></div>
+          <div class="shot"><img src="assets/crm_ops_data_model.png" alt="Operations dataset model (relationships + measures structure)"></div>
         </div>
+        <a class="go" href="project6.html" aria-label="Open Project 6">→</a>
       </div>
     </section>
 
@@ -455,52 +232,47 @@
         <h2>Project 7 — Client Pipeline & Task Monitoring (Power BI)</h2>
         <div class="tag">Power BI • DAX • semantic model • operational KPIs</div>
       </div>
-
-      <div class="grid grid--noarrow">
+      <div class="grid">
         <div class="card">
-          <h3>Why it’s relevant for Power BI roles</h3>
-          <p>
-            This is an operational pipeline dashboard: it tracks clients in-flight, assets in pipeline vs expected assets,
-            task status (active/pending), and ageing (e.g., tasks by age band) with slicers for owner/consultant and agent firm.
-            It demonstrates end-to-end BI thinking: clear KPI definitions, drillable breakdowns, and a model that supports fast,
-            reliable filtering.
-          </p>
-
-          <p style="margin-top:10px;">
-            <b>Data privacy note:</b> before sharing, I anonymise personally identifying fields (owners/consultants/firms)
-            by mapping them to synthetic labels (e.g., Owner A12, Firm K07) so no real identifiers appear in visuals.
-          </p>
-
+          <h3>Why it matters</h3>
+          <p>Pipeline KPIs, assets in vs expected, ageing analysis, and slicers for owner/consultant/firm — end-to-end BI monitoring.</p>
           <div class="meta">
-            <span class="pill">KPI cards</span>
-            <span class="pill">Operational monitoring</span>
-            <span class="pill">Slicers</span>
-            <span class="pill">DAX measures</span>
-            <span class="pill">Model design</span>
+            <span class="pill">Pipeline KPIs</span><span class="pill">Ageing</span><span class="pill">Drillable breakdowns</span>
           </div>
-
-          <p style="margin-top:12px;">
-            <a href="project7.html">View case study →</a>
-          </p>
-
-          <p style="margin-top:12px;color:#a7b2c3;font-size:13px;">
-            <b>Image filenames (place in <code>assets/</code>):</b><br>
-            • pipeline_dashboard_overview.png<br>
-            • pipeline_dashboard_data_model.png
-          </p>
         </div>
-
-        <!-- two rows (stacked) -->
-        <div class="stack2" aria-label="Client Pipeline screenshots">
-          <div class="frame frame--wide"><img src="assets/pipeline_dashboard_overview.png" alt="Client pipeline dashboard — KPI cards, task status breakdowns, ageing, and slicers"></div>
-          <div class="frame frame--wide"><img src="assets/pipeline_dashboard_data_model.png" alt="Pipeline semantic model — relationships, dimensions, and measures structure"></div>
+        <div class="visual">
+          <div class="shot"><img src="assets/pipeline_dashboard_overview.png" alt="Client pipeline dashboard — KPIs, ageing, slicers"></div>
+          <div class="shot"><img src="assets/pipeline_dashboard_data_model.png" alt="Pipeline semantic model — relationships + measures structure"></div>
         </div>
+        <a class="go" href="project7.html" aria-label="Open Project 7">→</a>
+      </div>
+    </section>
+
+    <!-- Project 8 -->
+    <section class="section">
+      <div class="top">
+        <h2>Project 8 — Approvals Workflow Matrix (Power BI)</h2>
+        <div class="tag">Power BI • matrix design • workflow visibility • governance</div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Why it matters</h3>
+          <p>Matrix view that makes approval ownership and status instantly legible across categories/subcategories and approvers.</p>
+          <div class="meta">
+            <span class="pill">Matrix UX</span><span class="pill">Operational control</span><span class="pill">Governance</span>
+          </div>
+        </div>
+        <div class="visual">
+          <div class="shot"><img src="assets/approvals_workflow_matrix.png" alt="Approvals workflow matrix (Power BI)"></div>
+          <div class="shot placeholder"><div>More screenshots can be added in the case study page.</div></div>
+        </div>
+        <a class="go" href="project8.html" aria-label="Open Project 8">→</a>
       </div>
     </section>
 
   </div>
 
-  <!-- Lightbox (click-to-enlarge) -->
+  <!-- Lightbox -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="Image preview">
       <div class="lightbox__top">
@@ -529,7 +301,6 @@
         document.body.style.overflow = 'hidden';
         lbClose.focus();
       }
-
       function closeLightbox(){
         lb.classList.remove('is-open');
         lb.setAttribute('aria-hidden','true');
@@ -537,13 +308,11 @@
         document.body.style.overflow = '';
       }
 
-      // Make all portfolio images clickable + keyboard accessible
-      const imgs = document.querySelectorAll('.shot img, .phone img, .frame img');
+      const imgs = document.querySelectorAll('.shot img');
       imgs.forEach(img => {
         img.tabIndex = 0;
         img.setAttribute('role','button');
         img.setAttribute('aria-label', (img.alt ? `Enlarge: ${img.alt}` : 'Enlarge image'));
-
         img.addEventListener('click', () => openLightbox(img.getAttribute('src'), img.getAttribute('alt')));
         img.addEventListener('keydown', (e) => {
           if(e.key === 'Enter' || e.key === ' '){
@@ -554,17 +323,9 @@
       });
 
       lbClose.addEventListener('click', closeLightbox);
-
-      // Close when clicking outside the panel
-      lb.addEventListener('click', (e) => {
-        if(e.target === lb) closeLightbox();
-      });
-
-      // Close on ESC
+      lb.addEventListener('click', (e) => { if(e.target === lb) closeLightbox(); });
       document.addEventListener('keydown', (e) => {
-        if(e.key === 'Escape' && lb.classList.contains('is-open')){
-          closeLightbox();
-        }
+        if(e.key === 'Escape' && lb.classList.contains('is-open')) closeLightbox();
       });
     })();
   </script>
