@@ -61,8 +61,25 @@
        phone frames, etc) you'd change/extend here.
        ========================================================= */
 
-    /* Two-shot visual stack (like your early projects) */
     .visual{display:grid;grid-template-rows:1fr 1fr;gap:14px}
+
+/* One-row image strip (use this for Project 3 phones) */
+.visual--row{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;            /* allows horizontal scroll if needed */
+  padding-bottom:2px;
+}
+.visual--row .shot{
+  flex:0 0 auto;
+  width:220px;               /* adjust for phone width */
+  height:440px;              /* adjust for phone height */
+}
+.visual--row .shot img{
+  object-fit:contain;         /* keeps portrait images uncropped */
+  background:#0b0f14;
+}
+
 
     /* Each image frame */
     .shot{border:1px solid #263043;border-radius:14px;overflow:hidden;background:#0e1420;min-height:110px}
@@ -235,7 +252,7 @@
             <span class="pill">Targets</span><span class="pill">Time intelligence</span><span class="pill">UX drilldown</span>
           </div>
         </div>
-        <div class="visual">
+<div class="visual visual--row">
           <div class="shot shot--contain"><img src="assets/tikbox_insights_cumulative.png" alt="Tik Box — cumulative progress"></div>
           <div class="shot shot--contain"><img src="assets/tikbox_year_grid.png" alt="Tik Box — year grid (calendar heatmap)"></div>
         </div>
