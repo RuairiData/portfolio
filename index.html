@@ -7,8 +7,7 @@
 
   <style>
     /* =========================================================
-       GLOBAL PAGE STYLES (background, font, overall page width)
-       Change here if you want to alter the site theme globally.
+       GLOBAL PAGE STYLES
        ========================================================= */
     body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:#0b0f14;color:#e9eef6}
     .wrap{max-width:980px;margin:0 auto;padding:28px 18px 60px}
@@ -16,107 +15,99 @@
     p{margin:0;color:#a7b2c3;line-height:1.5}
 
     /* =========================================================
-       SECTION CONTAINER (each project card block)
-       Change here if you want more/less padding, different border,
-       different rounding, or different panel background.
+       SECTION CONTAINER (each project panel)
        ========================================================= */
     .section{margin-top:18px;padding:22px;border:1px solid #263043;border-radius:24px;background:rgba(255,255,255,.02)}
 
     /* =========================================================
-       PROJECT HEADER ROW (Title left, Tag line right)
-       Change here for header spacing / typography.
+       HEADER ROW (title left, tech tag right)
        ========================================================= */
     .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
     .top h2{margin:0;font-size:20px}
     .tag{color:#a7b2c3;font-size:14px}
 
     /* =========================================================
-       MAIN PROJECT LAYOUT GRID
-       Default: [text card] [images] [arrow button]
-       If you want 1/3 vs 2/3 layouts (no arrow) you would add a
-       new modifier class like .grid--noarrow and change columns.
+       MAIN LAYOUT GRID (NO ARROW COLUMN)
+       1/3 text card + 2/3 visuals
        ========================================================= */
-    .grid{display:grid;grid-template-columns:1.2fr 1fr 60px;gap:14px;margin-top:14px;align-items:stretch}
-    .grid > *{min-width:0} /* prevents overflow when content is wide */
+    .grid{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(0,2fr);
+      gap:14px;
+      margin-top:14px;
+      align-items:stretch;
+    }
+    .grid > *{min-width:0}
 
     /* =========================================================
-       TEXT CARD (left column content)
-       Edit padding/background/border here.
+       TEXT CARD (left column)
        ========================================================= */
     .card{padding:18px;border:1px solid #263043;border-radius:16px;background:#121826}
     .card h3{margin:0 0 8px;font-size:16px}
 
-    /* Tags (pills) inside the text card */
     .meta{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
     .pill{font-size:12px;color:#a7b2c3;border:1px solid #263043;border-radius:999px;padding:5px 10px;background:rgba(255,255,255,.02)}
 
-    /* Links inside the text card */
     .card a{color:#e9eef6;text-decoration:none;border-bottom:1px solid rgba(233,238,246,.25)}
     .card a:hover{border-bottom-color:#e9eef6}
 
     /* =========================================================
-       IMAGE AREA (right-side visuals for each project)
-       This is the "2 images stacked" layout used throughout.
-       If you want different layouts (2 rows, horizontal scroll,
-       phone frames, etc) you'd change/extend here.
+       VISUALS (right column)
+       Default: 2 images stacked (tall dashboards)
        ========================================================= */
-
     .visual{display:grid;grid-template-rows:1fr 1fr;gap:14px}
 
-/* One-row image strip (use this for Project 3 phones) */
-.visual--row{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;            /* allows horizontal scroll if needed */
-  padding-bottom:2px;
-}
-.visual--row .shot{
-  flex:0 0 auto;
-  width:220px;               /* adjust for phone width */
-  height:440px;              /* adjust for phone height */
-}
-.visual--row .shot img{
-  object-fit:contain;         /* keeps portrait images uncropped */
-  background:#0b0f14;
-}
-
-
-    /* Each image frame */
     .shot{border:1px solid #263043;border-radius:14px;overflow:hidden;background:#0e1420;min-height:110px}
-
-    /* Image fills the frame by default */
     .shot img{width:100%;height:100%;object-fit:cover;display:block}
 
     /* Use for phone-ish previews so they don't get cropped */
-    /* (applied in HTML as: class="shot shot--contain") */
     .shot--contain img{object-fit:contain;background:#0b0f14}
 
-    /* Used for “empty” or “coming soon” boxes */
-    .placeholder{
-      display:flex;align-items:center;justify-content:center;
-      color:#a7b2c3;font-size:13px;line-height:1.4;
-      padding:12px;text-align:center;
+    /* =========================================================
+       VISUAL MODIFIERS
+       - Row strip for portrait phone screenshots (Project 3)
+       - 2x2 grid for 4 screenshots (Project 5)
+       - One-tile layout (Project 8)
+       ========================================================= */
+
+    /* One-row horizontal strip */
+    .visual--row{
+      display:flex;
+      gap:14px;
+      overflow-x:auto;
+      padding:2px 2px 6px;
+      -webkit-overflow-scrolling:touch;
+    }
+    .visual--row::-webkit-scrollbar{height:10px}
+    .visual--row::-webkit-scrollbar-thumb{background:#263043;border-radius:999px}
+
+    /* Phone-sized frames inside the row strip */
+    .visual--row .shot{
+      flex:0 0 auto;
+      width:220px;
+      height:440px;
+      min-height:unset;
+      background:#0b0f14;
+    }
+    .visual--row .shot img{object-fit:contain;background:#0b0f14}
+
+    /* 2x2 grid (two rows) */
+    .visual--grid2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      grid-auto-rows:1fr;
+      gap:14px;
     }
 
-    /* =========================================================
-       ARROW BUTTON (right-most column)
-       If you remove arrows (no third column), you can delete this
-       or stop using it in the HTML.
-       ========================================================= */
-    .go{
-      display:flex;align-items:center;justify-content:center;
-      border:1px solid #263043;border-radius:16px;
-      background:rgba(255,255,255,.02);
-      font-size:26px;text-decoration:none;color:#e9eef6
+    /* Single-tile (no empty space) */
+    .visual--one{
+      display:grid;
+      grid-template-rows:1fr;
+      gap:14px;
     }
-    .go:hover{transform:translateX(3px)}
 
     /* =========================================================
        LIGHTBOX (click-to-enlarge)
-       - Cursor/hover styling for images
-       - Fullscreen overlay + panel
-       If lightbox isn't working, check the JS at the bottom and
-       make sure your selector matches your image classes.
        ========================================================= */
     .shot img{cursor:zoom-in}
     .shot img:hover{opacity:.92}
@@ -127,7 +118,6 @@
       z-index:9999;padding:18px;
     }
     .lightbox.is-open{display:flex}
-
     .lightbox__panel{
       max-width:min(1200px,96vw);width:100%;max-height:92vh;
       border:1px solid #263043;border-radius:18px;background:#0b0f14;
@@ -151,97 +141,34 @@
     .lightbox__img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;background:#0b0f14}
 
     /* =========================================================
-       RESPONSIVE BREAKPOINTS
-       Tablet: collapses grid to single column and makes the two
-       images sit side-by-side (instead of stacked).
+       RESPONSIVE
        ========================================================= */
     @media(max-width:820px){
-      .grid{grid-template-columns:1fr} /* stack card + visuals + arrow */
+      .grid{grid-template-columns:1fr}
+      /* Default visual becomes side-by-side on tablets */
       .visual{grid-template-columns:1fr 1fr;grid-template-rows:none}
-      .go{height:56px}
       .lightbox__caption{white-space:normal}
+      /* Keep the phone strip scrollable on smaller screens */
+      .visual--row .shot{width:210px;height:420px}
+      /* 2x2 grid becomes single column if needed */
+      .visual--grid2{grid-template-columns:1fr}
     }
-
-    /* Phone: images go back to single column */
     @media(max-width:520px){
       .visual{grid-template-columns:1fr}
+      .visual--row .shot{width:200px;height:400px}
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <!-- =======================================================
-         PAGE HEADER (edit the main heading + intro here)
-         ======================================================= -->
     <h1>Ruairí McHugh — Data & BI Portfolio</h1>
     <p>Short case studies (screenshots + write-up). All visuals use public/synthetic or anonymised data — no proprietary info.</p>
 
-    <!-- =======================================================
-         PROJECT 1 SECTION
-         - Update title/tag text here
-         - Update images (src=...) here
-         - Update link target (href="project1.html") here
-         ======================================================= -->
-    <!-- Project 1 -->
+    <!-- Tik Box (Habit Analytics) -->
     <section class="section">
       <div class="top">
-        <h2>Project 1 — Reporting / MI Dashboard</h2>
-        <div class="tag">Power BI • SQL • KPI definitions</div>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <h3>What it shows</h3>
-          <p>Executive KPI view + drilldown to explain drivers (mix/volume/variance) with consistent measure definitions.</p>
-          <div class="meta">
-            <span class="pill">Star schema</span><span class="pill">DAX</span><span class="pill">QA checks</span>
-          </div>
-        </div>
-        <div class="visual">
-          <div class="shot"><img src="assets/project1_overview.png" alt="Project 1 overview"></div>
-          <div class="shot"><img src="assets/project1_drilldown.png" alt="Project 1 drilldown"></div>
-        </div>
-        <a class="go" href="project1.html" aria-label="Open Project 1">→</a>
-      </div>
-    </section>
-
-    <!-- =======================================================
-         PROJECT 2 SECTION
-         ======================================================= -->
-    <!-- Project 2 -->
-    <section class="section">
-      <div class="top">
-        <h2>Project 2 — KPI Automation</h2>
-        <div class="tag">Power Query • Power BI • Reporting cadence</div>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <h3>What it solves</h3>
-          <p>Replaces manual month-end reporting with a repeatable pipeline + KPI dictionary + exception flags.</p>
-          <div class="meta">
-            <span class="pill">Automation</span><span class="pill">Governance</span><span class="pill">Exceptions</span>
-          </div>
-        </div>
-        <div class="visual">
-          <div class="shot"><img src="assets/project2_kpis.png" alt="Project 2 KPI tiles"></div>
-          <div class="shot"><img src="assets/project2_trends.png" alt="Project 2 trends"></div>
-        </div>
-        <a class="go" href="project2.html" aria-label="Open Project 2">→</a>
-      </div>
-    </section>
-
-    <!-- =======================================================
-         PROJECT 3 SECTION (Tik Box)
-         NOTE: Right now this uses the SAME "2 images stacked" layout.
-         If you want the full phone-strip (horizontal scroll of many
-         portrait screenshots), this is the block you'd replace:
-           <div class="visual"> ... </div>
-         with your horizontal scroller markup.
-         ======================================================= -->
-    <!-- Project 3 -->
-    <section class="section">
-      <div class="top">
-        <h2>Project 3 — Tik Box (Habit Analytics)</h2>
+        <h2>Tik Box (Habit Analytics)</h2>
         <div class="tag">KPI design • time intelligence • targets vs actual • insights</div>
       </div>
       <div class="grid">
@@ -251,22 +178,27 @@
           <div class="meta">
             <span class="pill">Targets</span><span class="pill">Time intelligence</span><span class="pill">UX drilldown</span>
           </div>
+          <p style="margin-top:12px;">
+            <a href="project3.html">View case study →</a>
+          </p>
         </div>
-<div class="visual visual--row">
+
+        <!-- One-row strip for portrait phone screenshots -->
+        <div class="visual visual--row" aria-label="Tik Box screenshots (scroll horizontally)">
           <div class="shot shot--contain"><img src="assets/tikbox_insights_cumulative.png" alt="Tik Box — cumulative progress"></div>
           <div class="shot shot--contain"><img src="assets/tikbox_year_grid.png" alt="Tik Box — year grid (calendar heatmap)"></div>
+          <div class="shot shot--contain"><img src="assets/tikbox_habits_list.png" alt="Tik Box — habits list and weekly goals"></div>
+          <div class="shot shot--contain"><img src="assets/tikbox_edit_habit.png" alt="Tik Box — edit habit (name, colour, weekly goal)"></div>
+          <div class="shot shot--contain"><img src="assets/tikbox_insights_list.png" alt="Tik Box — insights list and completion rates"></div>
+          <div class="shot shot--contain"><img src="assets/tikbox_yoga_detail.png" alt="Tik Box — habit detail with goals hit and day-of-week insight"></div>
         </div>
-        <a class="go" href="project3.html" aria-label="Open Project 3">→</a>
       </div>
     </section>
 
-    <!-- =======================================================
-         PROJECT 4 SECTION
-         ======================================================= -->
-    <!-- Project 4 -->
+    <!-- Energy Forecast ML Dashboard -->
     <section class="section">
       <div class="top">
-        <h2>Project 4 — Energy Forecast ML Dashboard</h2>
+        <h2>Energy Forecast ML Dashboard</h2>
         <div class="tag">Python • Plotly Dash • time-series ML • model comparison</div>
       </div>
       <div class="grid">
@@ -276,22 +208,23 @@
           <div class="meta">
             <span class="pill">Dash</span><span class="pill">MAE/RMSE</span><span class="pill">Holdout</span>
           </div>
+          <p style="margin-top:12px;">
+            <a href="project4.html">View case study →</a>
+            &nbsp;&nbsp;•&nbsp;&nbsp;
+            <a href="assets/energy_forecast_report.pdf">Read report (PDF) →</a>
+          </p>
         </div>
         <div class="visual">
           <div class="shot"><img src="assets/energy_dashboard_overview.png" alt="Energy dashboard — overview"></div>
           <div class="shot"><img src="assets/energy_dashboard_filtered.png" alt="Energy dashboard — filtered comparison"></div>
         </div>
-        <a class="go" href="project4.html" aria-label="Open Project 4">→</a>
       </div>
     </section>
 
-    <!-- =======================================================
-         PROJECT 5 SECTION
-         ======================================================= -->
-    <!-- Project 5 -->
+    <!-- New Dwelling Completions Dashboard (Ireland) -->
     <section class="section">
       <div class="top">
-        <h2>Project 5 — New Dwelling Completions Dashboard (Ireland)</h2>
+        <h2>New Dwelling Completions Dashboard (Ireland)</h2>
         <div class="tag">Python • Plotly Dash • geo-viz • interactive filtering</div>
       </div>
       <div class="grid">
@@ -301,22 +234,25 @@
           <div class="meta">
             <span class="pill">KPI cards</span><span class="pill">Map</span><span class="pill">Chart switch</span>
           </div>
+          <p style="margin-top:12px;">
+            <a href="project5.html">View case study →</a>
+          </p>
         </div>
-        <div class="visual">
+
+        <!-- Two rows (2x2) -->
+        <div class="visual visual--grid2" aria-label="New Dwelling Completions screenshots">
           <div class="shot"><img src="assets/dwellings_dashboard_total_overview.png" alt="Dwelling completions — total overview"></div>
           <div class="shot"><img src="assets/dwellings_dashboard_line_chart.png" alt="Dwelling completions — line chart"></div>
+          <div class="shot"><img src="assets/dwellings_dashboard_pie_chart.png" alt="Dwelling completions — pie chart distribution by county"></div>
+          <div class="shot"><img src="assets/dwellings_dashboard_bar_chart.png" alt="Dwelling completions — bar chart by county"></div>
         </div>
-        <a class="go" href="project5.html" aria-label="Open Project 5">→</a>
       </div>
     </section>
 
-    <!-- =======================================================
-         PROJECT 6 SECTION
-         ======================================================= -->
-    <!-- Project 6 -->
+    <!-- Operations Workflow Dashboard (Power BI) -->
     <section class="section">
       <div class="top">
-        <h2>Project 6 — Operations Workflow Dashboard (Power BI)</h2>
+        <h2>Operations Workflow Dashboard (Power BI)</h2>
         <div class="tag">Power BI • DAX • semantic model • operational monitoring</div>
       </div>
       <div class="grid">
@@ -326,26 +262,21 @@
           <div class="meta">
             <span class="pill">KPI cards</span><span class="pill">Slicers</span><span class="pill">Measures table</span>
           </div>
+          <p style="margin-top:12px;">
+            <a href="project6.html">View case study →</a>
+          </p>
         </div>
         <div class="visual">
           <div class="shot"><img src="assets/crm_ops_dashboard.png" alt="Operations workflow dashboard (Power BI)"></div>
           <div class="shot"><img src="assets/crm_ops_data_model.png" alt="Operations dataset model (relationships + measures structure)"></div>
         </div>
-        <a class="go" href="project6.html" aria-label="Open Project 6">→</a>
       </div>
     </section>
 
-    <!-- =======================================================
-         PROJECT 7 SECTION
-         NOTE: If your Project 7 images are not loading, check:
-         - the filenames in /assets exactly match these src values
-         - GitHub Pages is case-sensitive (A != a)
-         - file extension is .png (not .PNG)
-         ======================================================= -->
-    <!-- Project 7 -->
+    <!-- Client Pipeline & Task Monitoring (Power BI) -->
     <section class="section">
       <div class="top">
-        <h2>Project 7 — Client Pipeline & Task Monitoring (Power BI)</h2>
+        <h2>Client Pipeline & Task Monitoring (Power BI)</h2>
         <div class="tag">Power BI • DAX • semantic model • operational KPIs</div>
       </div>
       <div class="grid">
@@ -355,23 +286,21 @@
           <div class="meta">
             <span class="pill">Pipeline KPIs</span><span class="pill">Ageing</span><span class="pill">Drillable breakdowns</span>
           </div>
+          <p style="margin-top:12px;">
+            <a href="project7.html">View case study →</a>
+          </p>
         </div>
         <div class="visual">
           <div class="shot"><img src="assets/pipeline_dashboard_overview.png" alt="Client pipeline dashboard — KPIs, ageing, slicers"></div>
           <div class="shot"><img src="assets/pipeline_dashboard_data_model.png" alt="Pipeline semantic model — relationships + measures structure"></div>
         </div>
-        <a class="go" href="project7.html" aria-label="Open Project 7">→</a>
       </div>
     </section>
 
-    <!-- =======================================================
-         PROJECT 8 SECTION
-         (This one uses a placeholder for the second screenshot.)
-         ======================================================= -->
-    <!-- Project 8 -->
+    <!-- Approvals Workflow Matrix (Power BI) -->
     <section class="section">
       <div class="top">
-        <h2>Project 8 — Approvals Workflow Matrix (Power BI)</h2>
+        <h2>Approvals Workflow Matrix (Power BI)</h2>
         <div class="tag">Power BI • matrix design • workflow visibility • governance</div>
       </div>
       <div class="grid">
@@ -381,21 +310,21 @@
           <div class="meta">
             <span class="pill">Matrix UX</span><span class="pill">Operational control</span><span class="pill">Governance</span>
           </div>
+          <p style="margin-top:12px;">
+            <a href="project8.html">View case study →</a>
+          </p>
         </div>
-        <div class="visual">
+
+        <!-- No placeholder tile -->
+        <div class="visual visual--one" aria-label="Approvals Workflow Matrix screenshot">
           <div class="shot"><img src="assets/approvals_workflow_matrix.png" alt="Approvals workflow matrix (Power BI)"></div>
-          <div class="shot placeholder"><div>More screenshots can be added in the case study page.</div></div>
         </div>
-        <a class="go" href="project8.html" aria-label="Open Project 8">→</a>
       </div>
     </section>
 
   </div>
 
-  <!-- =========================================================
-       LIGHTBOX HTML (the hidden overlay that appears on click)
-       If you change IDs here, update the JS below to match.
-       ========================================================= -->
+  <!-- Lightbox -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="Image preview">
       <div class="lightbox__top">
@@ -408,13 +337,6 @@
     </div>
   </div>
 
-  <!-- =========================================================
-       LIGHTBOX JS
-       IMPORTANT: the selector below currently targets ONLY:
-         const imgs = document.querySelectorAll('.shot img');
-       If you later use .phone img or .wide img etc, you must
-       update the selector to include those classes as well.
-       ========================================================= -->
   <script>
     (function(){
       const lb = document.getElementById('lightbox');
@@ -422,7 +344,6 @@
       const lbCaption = document.getElementById('lightboxCaption');
       const lbClose = document.getElementById('lightboxClose');
 
-      // Open the overlay with a given image src + caption
       function openLightbox(src, alt){
         lbImg.src = src;
         lbImg.alt = alt || '';
@@ -433,7 +354,6 @@
         lbClose.focus();
       }
 
-      // Close the overlay and clear state
       function closeLightbox(){
         lb.classList.remove('is-open');
         lb.setAttribute('aria-hidden','true');
@@ -441,8 +361,7 @@
         document.body.style.overflow = '';
       }
 
-      // Attach click + keyboard handlers to images
-      // If you want to enable more images, expand this selector.
+      // Make ALL screenshots clickable
       const imgs = document.querySelectorAll('.shot img');
       imgs.forEach(img => {
         img.tabIndex = 0;
@@ -450,7 +369,6 @@
         img.setAttribute('aria-label', (img.alt ? `Enlarge: ${img.alt}` : 'Enlarge image'));
 
         img.addEventListener('click', () => openLightbox(img.getAttribute('src'), img.getAttribute('alt')));
-
         img.addEventListener('keydown', (e) => {
           if(e.key === 'Enter' || e.key === ' '){
             e.preventDefault();
@@ -459,13 +377,12 @@
         });
       });
 
-      // Close button
       lbClose.addEventListener('click', closeLightbox);
 
-      // Close when clicking the dark overlay (outside the panel)
-      lb.addEventListener('click', (e) => { if(e.target === lb) closeLightbox(); });
+      lb.addEventListener('click', (e) => {
+        if(e.target === lb) closeLightbox();
+      });
 
-      // Close when pressing Escape
       document.addEventListener('keydown', (e) => {
         if(e.key === 'Escape' && lb.classList.contains('is-open')) closeLightbox();
       });
